@@ -1,9 +1,8 @@
 from fastapi import FastAPI
-from src.routes import quiz, student
+from src.routes import student
 
 app = FastAPI(title="Backend Service")
 
-app.include_router(quiz.router, prefix="/quiz", tags=["Quiz"])
 app.include_router(student.router, prefix="/student", tags=["Student"])
 
 @app.get("/")
