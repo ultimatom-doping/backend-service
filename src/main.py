@@ -3,7 +3,7 @@ from src.routes import student
 
 app = FastAPI(title="Backend Service")
 
-app.include_router(student.router, prefix="/student", tags=["Student"])
+app.include_router(student.router, prefix="/api", tags=["Students"])
 
 @app.get("/")
 def health_check():
