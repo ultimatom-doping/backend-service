@@ -10,6 +10,8 @@ class Student(Base):
     created_at = Column(TIMESTAMP, default=datetime.datetime.utcnow)
     deleted_at = Column(TIMESTAMP, nullable=True)
 
+    questions = relationship("StudentQuestion", back_populates="student")
+
 class Subject(Base):
     __tablename__ = "subjects"
     id = Column(Integer, primary_key=True, index=True)
@@ -31,6 +33,7 @@ class Question(Base):
     deleted_at = Column(TIMESTAMP, nullable=True)
 
     subject = relationship("Subject")
+    students = relationship("StudentQuestion", back_populates="question")
 
 class QuizQuestion(Base):
     __tablename__ = "quizzes_questions"
@@ -46,3 +49,6 @@ class StudentQuestion(Base):
     result = Column(String, nullable=False)
     attempted_at = Column(TIMESTAMP)
     created_at = Column(TIMESTAMP, default=datetime.datetime.utcnow)
+
+    student = relationship("Student", back_populates="questions")
+    question = relationship("Question", back_populates="students")
