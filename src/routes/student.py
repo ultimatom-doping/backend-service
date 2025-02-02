@@ -2,7 +2,7 @@ from fastapi import APIRouter, Depends, Query
 from sqlalchemy.orm import Session
 from typing import List
 from src.database.session import get_db
-from src.services.student_service import get_student_questions, get_student_questions_for_all_students
+# from src.services.student_service import get_student_questions, get_student_questions_for_all_students, get_suggested_question
 from src.schemas.student import StudentQuestionSchema
 from typing import Optional
 from datetime import datetime
@@ -23,3 +23,7 @@ def read_all_students_questions(
     If 'since' is provided, returns only those records whose attempted_at >= since.
     """
     return get_student_questions_for_all_students(db, since)
+
+# @router.get("/students/{student_id}/suggest-question/{subject_id}", response_model=List[StudentQuestionSchema])
+# def fetch_suggested_question(student_id: int, subject_id: int):
+#     return get_suggested_question(student_id, subject_id)
