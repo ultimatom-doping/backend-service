@@ -31,7 +31,9 @@ class ClaudeBedrockService:
                             "content": [
                                 {
                                     "type": "text",
-                                    "text": prompt
+                                    "text": prompt + "\nBu soruya benzer bir soru yaratmanı istiyorum. Bir " 
+                                    + "test kitabında kullanılan jargonu kullan. Sadece ama sadece soruyu yaz." 
+                                    + " Başka hiçbir açıklama yapma."
                                 }
                             ]
                         }
@@ -41,10 +43,8 @@ class ClaudeBedrockService:
                 contentType="application/json",
             )
 
-            # Read and parse the response
             response_body = json.loads(response["body"].read().decode("utf-8"))
 
-            # Extract the actual text response from the assistant
             if "content" in response_body and isinstance(response_body["content"], list):
                 assistant_response = "\n".join(
                     item["text"] for item in response_body["content"] if item["type"] == "text"
